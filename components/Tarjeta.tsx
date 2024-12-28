@@ -1,15 +1,23 @@
-import { Image,StyleSheet, Text, View } from 'react-native'
+import { Alert, Image,StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 export default function Tarjeta( props : any) {
   //  console.log(props);
+
+  function detalles(item: any){
+    Alert.alert( item.name,item.description + '\nAtributos: ' + item.atributos)
+  }
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={ () => detalles(props.informacion)}>
       <Text style={styles.txtTitulo}>{props.informacion.name}</Text>
+      <View style={styles.fila}>
       <Image source={{ uri: props.informacion.image}} 
       style={styles.img}
       />
-    </View>
+      <Text style={styles.textDescripcion}>{props.informacion.description}</Text>
+      </View>
+      
+    </TouchableOpacity>
   )
 }
 
@@ -31,5 +39,13 @@ const styles = StyleSheet.create({
         margin:2,
         borderRadius: 20
 
+    },
+    fila:{
+      flexDirection:'row'
+    },
+    textDescripcion:{
+      color:'white',
+      width:'65%',
+      
     }
 })
